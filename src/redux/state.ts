@@ -1,4 +1,9 @@
-let store = {
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
+export let store = {
     _state: {
         profilePage: {
             posts: [
@@ -20,7 +25,7 @@ let store = {
                 {id: 4, name: 'Sasha'},
                 {id: 5, name: 'Victor'},
                 {id: 6, name: 'Valera'}],
-            newMessageText: 'it-kamasutra.com'
+            newMessageText: ''
         },
         sidebar: {
             friends: [
@@ -39,7 +44,7 @@ let store = {
         this._callSubcriber = observer;
     },
     dispatch(action:ActionTypes) { //{type:'ADD-POST'}
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const newPost: PostType = {
                     id: new Date().getTime(),
                     message: action.postText,
@@ -49,11 +54,11 @@ let store = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = '';
             this._callSubcriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
 
             store._state.profilePage.newPostText = action.newText;
             this._callSubcriber(this._state);
-        } else if(action.type==='ADD-MESSAGE'){
+        } else if(action.type=== ADD_MESSAGE){
             let newMessage: MessageType = {
                     id: new Date().getTime(),
                     message: action.messageText,
@@ -63,14 +68,24 @@ let store = {
             this._state.dialogsPage.messages.push(newMessage)
             this._state.dialogsPage.newMessageText = '';
             this._callSubcriber(this._state);
-        } else if(action.type ==='UPDATE-NEW-MESSAGE-TEXT'){
+        } else if(action.type === UPDATE_NEW_MESSAGE_TEXT){
 
             this._state.dialogsPage.newMessageText = action.newText;
             this._callSubcriber(this._state);
         }
-
     }
 }
+
+export const addPostCreater = (postText: string): ActionAddPostType =>({type: ADD_POST, postText})
+
+export const updateTextCreater = (newText: string): ActionUpdateNewPostTextType =>
+    ({type: UPDATE_NEW_POST_TEXT, newText})
+
+export const addMessageCreater = (messageText: string): ActionAddMessageType => ({type: ADD_MESSAGE, messageText})
+
+export const updateNewMessageTextCreater = (newText: string): ActionUpdateNewMessageTextType =>
+    ({type: UPDATE_NEW_MESSAGE_TEXT, newText})
+
 
 
 export type MessageType = {

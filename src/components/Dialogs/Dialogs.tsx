@@ -2,17 +2,25 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionTypes, DialogType, MessageType} from "../../redux/state";
+import {
+    ActionAddMessageType,
+    ActionTypes,
+    ActionUpdateNewMessageTextType, addMessageCreater,
+    DialogType,
+    MessageType, updateNewMessageTextCreater
+} from "../../redux/state";
 
 type dialogsPropsType = {
     dialogsPage: { messages: Array<MessageType>, dialogs: Array<DialogType>, newMessageText: string },
-    dispatch:(action:ActionTypes)=>void
+    dispatch: (action: ActionTypes) => void
 }
+
+
 
 const Dialogs = (props: dialogsPropsType) => {
 
     let addMessage = () => {
-        props.dispatch({type: 'ADD-MESSAGE', messageText: props.dialogsPage.newMessageText})
+        props.dispatch(addMessageCreater(props.dialogsPage.newMessageText))
     }
 
 
@@ -30,10 +38,11 @@ const Dialogs = (props: dialogsPropsType) => {
                 <div>
                     <textarea value={props.dialogsPage.newMessageText}
                               onChange={(e) => {
-                                  props.dispatch({type:'UPDATE-NEW-MESSAGE-TEXT',newText:e.currentTarget.value})}}/>
+                                  props.dispatch(updateNewMessageTextCreater( e.currentTarget.value))
+                              }}/>
                 </div>
                 <div>
-                    <button onClick={addMessage}>Add post</button>
+                    <button onClick={addMessage}>Add message</button>
                 </div>
             </div>
         </div>
