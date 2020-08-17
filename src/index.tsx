@@ -1,8 +1,5 @@
 import * as serviceWorker from './serviceWorker';
-import store, {RootStateType} from './redux/state';
-
-
-
+import store, {RootStateType, StoreType} from './redux/store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -15,8 +12,9 @@ let rerenderEntireTree=(state:RootStateType)=>{
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
-                <App state={state}
+                <App store={store}
                      dispatch={store.dispatch.bind(store)}
+
                 />
             </React.StrictMode>
         </BrowserRouter>,
@@ -24,7 +22,7 @@ let rerenderEntireTree=(state:RootStateType)=>{
 }
 
 rerenderEntireTree(store.getState());
-store.subccribe(rerenderEntireTree);
+store.subscribe(rerenderEntireTree);
 
 
 

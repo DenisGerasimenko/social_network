@@ -1,13 +1,8 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {
-    ActionAddPostType,
-    ActionTypes,
-    ActionUpdateNewPostTextType,
-    addPostCreater,
-    PostType, updateTextCreater
-} from "../../../redux/state";
+import {addPostAC, updateTextAC} from "../../../redux/profile-reducer";
+import {ActionTypes, PostType} from "../../../redux/store";
 
 
 type MyPostsPropsType={
@@ -23,7 +18,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     let addPost = () => {
 
-            props.dispatch(addPostCreater(props.profilePage.newPostText));
+            props.dispatch(addPostAC(props.profilePage.newPostText));
         }
         return (
         <div className={s.postsBlock}>
@@ -34,7 +29,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
 
 
-                              onChange={(e)=>props.dispatch(updateTextCreater(e.currentTarget.value))} />
+                              onChange={(e)=>props.dispatch(updateTextAC(e.currentTarget.value))} />
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
