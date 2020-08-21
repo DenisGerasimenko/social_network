@@ -3,35 +3,28 @@ import './App.css';
 import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
-import store, {ActionTypes, RootStateType, StoreType} from "./redux/store";
+import {ActionTypes, RootStateType, StoreType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
 
 type AppPropsType = {
-  store:StoreType
-    dispatch:(action: ActionTypes) => void
+    reduxStore:any
+    state: RootStateType
+    dispatch: (action: ActionTypes) => void
 }
-const App:React.FC <AppPropsType>=(props)=> {
-
-    const state=props.store.getState();
-
+const App: React.FC<AppPropsType> = (props) => {
+debugger
     return (
-
         <div className='app-wrapper'>
-            <Header/>
-            <Navbar state={state}/>
+            <Header />
+            <Navbar state={props.state}/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs'
-                       render={() => <Dialogs
-                           dialogsPage={state.dialogsPage}
-                           dispatch={props.dispatch}/>}/>
+                       render={ () => <DialogsContainer reduxStore={props.reduxStore} /> }/>
+
                 <Route path='/profile'
-                       render={() => <Profile
-                           profilePage={state.profilePage}
-                           dispatch={props.dispatch}/>}/>
-                {/*<Route path='/friends'
-                       render={() => <Friends
-                           state={props.state}/>}/>*/}
+                       render={ () => <Profile reduxStore={props.reduxStore}/> }/>
             </div>
         </div>
     )

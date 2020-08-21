@@ -1,5 +1,5 @@
-import profileReducer, {addPostAC, updateTextAC} from "./profile-reducer";
-import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./dialogs-reducer";
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 
@@ -26,7 +26,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
+    newMessageBody: string
 
 }
 
@@ -74,7 +74,7 @@ export const store: StoreType = {
                 {id: 4, name: 'Sasha'},
                 {id: 5, name: 'Victor'},
                 {id: 6, name: 'Valera'}],
-            newMessageText: ''
+            newMessageBody: ''
         },
         sidebar: {
             friends: [
@@ -103,10 +103,10 @@ export const store: StoreType = {
 }
 
 export type ActionTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateTextAC>
-    | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof updateNewMessageTextAC>
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof updateNewMessageBodyCreator>
 
 export default store;
 

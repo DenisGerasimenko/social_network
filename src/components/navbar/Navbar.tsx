@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Friends from "../Friends/Friends";
-import {RootStateType} from "../../redux/store";
+import {RootStateType, StoreType} from "../../redux/store";
 
 type NavbarPropsType={
     state:RootStateType
@@ -10,7 +10,7 @@ type NavbarPropsType={
 
 
 function Navbar(props:NavbarPropsType) {
-
+debugger
     return (
         <nav className={s.nav}>
             <div className={s.item}>

@@ -3,12 +3,12 @@ import FriendItem from "./FriendItem/FriendItem";
 import s from "./Friends.module.css";
 import {FriendType} from "../../redux/store";
 
-type FriendsPropsType={
-    sidebar:{friends:Array<FriendType>}
+type FriendsPropsType = {
+    sidebar: { friends: Array<FriendType> }
 }
 
 const Friends = (props: FriendsPropsType) => {
-
+    debugger
 
     let sidebarElements = props.sidebar.friends.map((d: any) => <FriendItem name={d.name} id={d.id}/>);
 
