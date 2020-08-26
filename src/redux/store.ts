@@ -4,55 +4,55 @@ import sidebarReducer from "./sidebar-reducer";
 
 
 
-export type MessageType = {
+/*type MessageType = {
     id: number
     message: string
 }
 
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
 }
 
-export type PostType = {
+type PostType = {
     id: number
     message: string
     likesCount: number
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-export type DialogPageType = {
+type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody: string
 
 }
 
-export type FriendType = {
+type FriendType = {
     id: number,
     name: string
 }
-export type SidebarType = {
+type SidebarType = {
     friends: Array<FriendType>
 }
 
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebar: SidebarType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _callSubcriber: (_state: RootStateType) => void
     subscribe: (obserever: any) => void
     dispatch: (action: ActionTypes) => void
-}
+}*/
 
-export const store: StoreType = {
+/*const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -92,21 +92,21 @@ export const store: StoreType = {
     subscribe(observer: any) {
         this._callSubcriber = observer;
     },
-    dispatch(action: ActionTypes) { //{type:'ADD-POST'}
+    dispatch(action: any) { //{type:'ADD-POST'}
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar);
 
         this._callSubcriber(this._state);
     }
 }
 
-export type ActionTypes =
+type ActionTypes =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
 
-export default store;
+export default store;*/
 

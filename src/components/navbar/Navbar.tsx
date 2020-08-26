@@ -1,36 +1,36 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import Friends from "../Friends/Friends";
-import {RootStateType, StoreType} from "../../redux/store";
-
-type NavbarPropsType={
-    state:RootStateType
-}
 
 
-function Navbar(props:NavbarPropsType) {
-debugger
+import {ReduxStoreType} from "../../redux/redux-store";
+import FriendsContainer from "../Friends/FriendsContainer";
+
+
+
+
+function Navbar() {
+
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to='/profile'activeClassName={s.activeLink}>Profile</NavLink>
+                <NavLink to='/profile' activeClassName={s.activeLink}>Profile</NavLink>
             </div>
             <div className={`${s.item} ${s.active}`}>
-                <NavLink to='/dialogs'activeClassName={s.activeLink}>Messages</NavLink>
+                <NavLink to='/dialogs' activeClassName={s.activeLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/news'activeClassName={s.activeLink}>News</NavLink>
+                <NavLink to='/news' activeClassName={s.activeLink}>News</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/music'activeClassName={s.activeLink}>Music</NavLink>
+                <NavLink to='/music' activeClassName={s.activeLink}>Music</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/settings'activeClassName={s.activeLink}>Settings</NavLink>
+                <NavLink to='/settings' activeClassName={s.activeLink}>Settings</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/friends'activeClassName={s.activeLink}>Friends</NavLink>
-                <Friends sidebar={props.state.sidebar}/>
+                <NavLink to='/friends' activeClassName={s.activeLink}>Friends</NavLink>
+                <FriendsContainer/>
             </div>
         </nav>);
 };

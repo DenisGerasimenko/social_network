@@ -1,16 +1,16 @@
 import React from "react";
 import FriendItem from "./FriendItem/FriendItem";
 import s from "./Friends.module.css";
-import {FriendType} from "../../redux/store";
+import {FriendType} from "../../redux/sidebar-reducer";
+
 
 type FriendsPropsType = {
-    sidebar: { friends: Array<FriendType> }
+    friends: Array<FriendType>
 }
 
 const Friends = (props: FriendsPropsType) => {
-    debugger
 
-    let sidebarElements = props.sidebar.friends.map((d: any) => <FriendItem name={d.name} id={d.id}/>);
+    let sidebarElements = props.friends.map((d:any ) => <FriendItem name={d.name} id={d.id} key={d.id}/>);
 
 
     return (
@@ -22,5 +22,7 @@ const Friends = (props: FriendsPropsType) => {
         </div>
     )
 }
+
+
 
 export default Friends;

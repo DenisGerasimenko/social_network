@@ -1,7 +1,24 @@
-import {ActionTypes, DialogPageType, MessageType, PostType, RootStateType} from "./store";
-
 const SEND_MESSAGE = 'SEND_MESSAGE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+
+export type DialogActionType =
+    ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof updateNewMessageBodyCreator>
+
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogType = {
+    id: number
+    name: string
+}
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody: string
+
+}
 
 let initialState = {
     messages: [
@@ -20,19 +37,21 @@ let initialState = {
     newMessageBody: ''
 };
 
-const dialogsReducer = (state = initialState, action: ActionTypes): DialogPageType => {
+const dialogsReducer = (state = initialState, action: DialogActionType): DialogPageType => {
     switch (action.type) {
-
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body;
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
 
-            return state;
         case SEND_MESSAGE:
             let body = state.newMessageBody;
-            state.newMessageBody = '';
-            state.messages.push({id: 6, message: body});
-            return state;
-
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}]
+            };
         default:
             return state;
     }
@@ -40,6 +59,6 @@ const dialogsReducer = (state = initialState, action: ActionTypes): DialogPageTy
 
 export const sendMessageCreator = () => ({type: SEND_MESSAGE}) as const
 
-export const updateNewMessageBodyCreator = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body:body}) as const
+export const updateNewMessageBodyCreator = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body}) as const
 
 export default dialogsReducer;
