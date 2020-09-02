@@ -5,7 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
 import {Route} from 'react-router-dom';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import {StateType, ReduxStoreType} from "./redux/redux-store";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App = () => {
@@ -21,6 +21,9 @@ const App = () => {
 
                 <Route path='/profile'
                        render={() => <Profile/>}/>
+
+                       <Route path='/users'
+                              render={()=><UsersContainer />}/>
             </div>
         </div>
     )
