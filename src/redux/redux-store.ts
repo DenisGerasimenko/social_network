@@ -17,7 +17,7 @@ let store = createStore(reducers);
 
 
 export type ReduxStoreType = typeof store;
-export type DispatchType= typeof store.dispatch;
+
 
 
 
