@@ -16,6 +16,7 @@ export type StateType = ReturnType<typeof reducers>;
 let store = createStore(reducers);
 
 
+
 export type ReduxStoreType = typeof store;
 
 
