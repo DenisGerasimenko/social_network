@@ -8,13 +8,14 @@ import {Dispatch} from "redux";
 
 let mapStateToProps = (state: StateType) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        updateNewMessageBody: (body:string) => {
+        updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))
         },
         sendMessage: () => {
