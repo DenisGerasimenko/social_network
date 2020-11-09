@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.png";
-import {UserType} from "../../redux/users-reducer";
+import {toggleFollowingProgress, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -12,6 +13,7 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    followingInProgress: Array<number>
 }
 
 
@@ -41,12 +43,14 @@ let Users = (props: UsersPropsType) => {
 
     </div>
     <div>
-    {u.followed ? <button onClick={() => {
-            props.unfollow(u.id)
-        }}>Unfollow</button>
-        : <button onClick={() => {
-            props.follow(u.id)
-        }}>Follow</button>}
+    {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                          onClick={() => {props.unfollow(u.id);}}>
+            Unfollow</button>
+
+        : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                  onClick={() => {props.follow(u.id)}}>
+            Follow</button>
+    };
     </div>
     </span>
                 <span>
