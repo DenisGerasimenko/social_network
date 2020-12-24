@@ -2,7 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {PostType} from "../../../redux/profile-reducer";
-
+import {Button, TextareaAutosize, TextField} from "@material-ui/core";
+import {useFormik} from "formik";
 
 
 type MyPostsPropsType = {
@@ -31,19 +32,37 @@ const MyPosts = (props: MyPostsPropsType) => {
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement}
-                              value={props.newPostText}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
+                <AddPostForm/>
             <div className={s.posts}>
                 {postsElements}
             </div>
         </div>
+    )
+}
+
+const AddPostForm = (props: any) => {
+    const formik = useFormik({
+        initialValues: {
+            post: ''
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values));
+        },
+    })
+
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <TextField
+                id="outlined-basic"
+                label="post"
+                variant="outlined"
+                name="post"
+                onChange={formik.handleChange}
+                value={formik.values.post}
+            />
+            <Button type={'submit'} variant={'contained'} color={'primary'}>Add post</Button>
+
+        </form>
     )
 }
 export default MyPosts;

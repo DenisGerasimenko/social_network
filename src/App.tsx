@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import {Route} from 'react-router-dom';
@@ -6,10 +6,14 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
-import LoginPage from "./Login/Login";
+import {Login} from "./Login/Login";
+import {getAuthUserData} from "./redux/auth-reducer";
+import {StateType} from "./redux/redux-store";
+import {connect} from "react-redux";
 
 
-const App = () => {
+const App = (props: any) => {
+
 
 
     return (
@@ -20,13 +24,13 @@ const App = () => {
                 <Route path='/dialogs'
                        render={() => <DialogsContainer/>}/>
 
-                <Route path='/profile/:userId?'
+                <Route exect path='/profile/:userId?'
                        render={() => <ProfileContainer/>}/>
 
                 <Route path='/users'
                        render={() => <UsersContainer/>}/>
-                <Route path='/login'
-                       render={() => <LoginPage/>}/>
+                    <Route exect path={'/login'}
+                           render={() => <Login/>}/>
             </div>
         </div>
     )

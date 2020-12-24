@@ -5,6 +5,11 @@ export type ResponseType<D = {}> = {
     messages: Array<string>
     data: D
 }
+type AuthMeType = {
+    id: number
+    email: string,
+    login: string
+}
 
 type PhotosType = {
     small: null
@@ -23,13 +28,26 @@ type ResponseUserGetType = {
     items: Array<ItemType>
     totalCount: number
 }
+export type ErrorFormikType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
+    captcha?: string
+}
+
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
+}
 
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': ""
+        'API-KEY': "4c7ebabc-af48-45d8-9001-1fb93ae1053e"
     }
 })
 export const usersAPI = {
@@ -67,6 +85,9 @@ export const profileAPI = {
 export const authAPI = {
     me() {
         return instance.get<any>('auth/me')
+    },
+    login(data: LoginParamsType) {
+        return instance.post<ResponseType<{ userId?: number }>>('auth/login/', data)
     }
 }
 
