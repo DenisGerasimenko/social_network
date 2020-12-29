@@ -2,15 +2,14 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {PostType} from "../../../redux/profile-reducer";
-import {Button, TextareaAutosize, TextField} from "@material-ui/core";
-import {useFormik} from "formik";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
 
 type MyPostsPropsType = {
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    addPost: (newPostText: string) => void
     posts: Array<PostType>
-    newPostText: string
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -19,20 +18,14 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let onAddPost = () => {
-        props.addPost();
+    let onAddPost = (values: any) => {
+        props.addPost(values.newPostText);
     }
 
-    let onPostChange = () => {
-        if (newPostElement.current) {
-            let text = newPostElement.current.value
-            props.updateNewPostText(text);
-        }
-    }
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-                <AddPostForm/>
+            <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElements}
             </div>
@@ -40,29 +33,26 @@ const MyPosts = (props: MyPostsPropsType) => {
     )
 }
 
-const AddPostForm = (props: any) => {
-    const formik = useFormik({
-        initialValues: {
-            post: ''
-        },
-        onSubmit: values => {
-            alert(JSON.stringify(values));
-        },
-    })
+type FormDataType = {
+    newPostText: string
+}
+
+const maxLength10 = maxLengthCreator(10)
+
+const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <TextField
-                id="outlined-basic"
-                label="post"
-                variant="outlined"
-                name="post"
-                onChange={formik.handleChange}
-                value={formik.values.post}
-            />
-            <Button type={'submit'} variant={'contained'} color={'primary'}>Add post</Button>
-
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name='newPostText' component={Textarea} placeholder={'Post message'}
+                       validate={[required, maxLength10]}/>
+            </div>
+            <div>
+                <button>Add post</button>
+            </div>
         </form>
     )
 }
+const AddNewPostFormRedux = reduxForm<FormDataType>({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
+
 export default MyPosts;

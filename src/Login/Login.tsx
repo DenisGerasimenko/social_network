@@ -1,26 +1,32 @@
-import React from 'react'
-import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Button, Grid} from '@material-ui/core'
-import {useFormik} from "formik";
-import {ErrorFormikType, LoginParamsType} from "../api/api";
-import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../redux/auth-reducer";
-import {StateType} from "../redux/redux-store";
-import {Redirect} from 'react-router-dom';
-import {Field, reduxForm} from "redux-form";
+import React from 'react';
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Input} from "../components/common/FormsControls/FormsControls";
+import {required} from "../utils/validators/validators";
 
 
-export const LoginForm = (props: any) => {
+type FormDataType = {
+    login: string
+    password: string
+    rememberMe: boolean
+}
+
+
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     console.log('RERENDER')
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={'input'}/>
+                <Field placeholder={'Login'} name={'login'}
+                       validate={[required]}
+                       component={Input}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={'input'}/>
+                <Field placeholder={'Password'} name={'password'}
+                       validate={[required]}
+                       component={Input}/>
             </div>
             <div>
-                <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
+                <Field component={Input} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
             <div>
                 <button>Login</button>
@@ -29,13 +35,11 @@ export const LoginForm = (props: any) => {
     )
 }
 
-const LoginReduxForm = reduxForm({
-    form: 'login'
-})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-export const Login = (props: any) => {
+export const Login = () => {
 
-    const onSubmit=(formData:any)=>{
+    const onSubmit = (formData: FormDataType) => {
         console.log(formData)
     }
     return <div>
