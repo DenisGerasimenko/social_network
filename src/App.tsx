@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import {Route} from 'react-router-dom';
@@ -6,10 +6,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
-import {Login} from "./Login/Login";
-import {getAuthUserData} from "./redux/auth-reducer";
-import {StateType} from "./redux/redux-store";
-import {connect} from "react-redux";
+import Login from "./Login/Login";
 
 
 const App = (props: any) => {
