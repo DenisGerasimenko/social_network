@@ -1,9 +1,11 @@
-import {Dispatch} from "redux";
+import {Action, Dispatch} from "redux";
 import {authAPI, LoginParamsType, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
+import { ThunkAction } from "redux-thunk";
 
 
 const SET_USER_DATA = 'SET_USER_DATA';
-const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
+
 
 
 type UsersActionTypes =
@@ -28,7 +30,7 @@ const authReducer = (state = initialState, action: UsersActionTypes): InitialSta
                 ...state,
                 ...action.payload
             }
-            default:
+        default:
             return state;
     }
 }
@@ -38,35 +40,39 @@ export const setAuthUserData = (userId: null, email: null, login: null, isAuth: 
 
 
 
-type DispatchType = Dispatch<UsersActionTypes>
 
-export const getAuthUserData = () => (dispatch: DispatchType) => {
-    authAPI.me()
+export const getAuthUserData = (): ThunkAction<void, InitialStateType, unknown, Action<string>> => (dispatch) => {
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
-                dispatch(setAuthUserData(id, email, login,true));
+                dispatch(setAuthUserData(id, email, login, true));
             }
         });
 }
 
 
-export const login = (data: LoginParamsType) => (dispatch: any) => {
+export const login = (data: LoginParamsType): ThunkAction<void, InitialStateType, unknown, Action<string>> => (dispatch) => {
+
+    dispatch(stopSubmit('login', {_error: 'Common error'}));
 
     authAPI.login(data)
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+            } else {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error';
+                dispatch(stopSubmit('login', {_error: message}));
             }
         });
 }
 
-export const logout = () => (dispatch: any) => {
+export const logout = (): ThunkAction<void, InitialStateType, unknown, Action<string>> => (dispatch) => {
 
     authAPI.logout()
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null,false));
+                dispatch(setAuthUserData(null, null, null, false));
             }
         });
 }
