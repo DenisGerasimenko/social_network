@@ -46,7 +46,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     Action<string>>
 
-export const initializeApp = () => (dispatch: any) => {
+export const initializeApp = () =>  (dispatch: any) => {
 
     let promise = dispatch(getAuthUserData());
     promise.then(() => {

@@ -12,9 +12,11 @@ type MyPostsPropsType = {
     posts: Array<PostType>
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
     let postsElements =
-        props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>);
+        [...props.posts]
+            .reverse()
+            .map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>);
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
@@ -31,7 +33,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+});
 
 type FormDataType = {
     newPostText: string

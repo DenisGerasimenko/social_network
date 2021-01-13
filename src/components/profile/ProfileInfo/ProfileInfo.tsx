@@ -17,9 +17,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
     return (<div>
-            {/*  <div>
-                <img src='https://avatars.mds.yandex.net/get-pdb/872807/fd5593a8-465f-4a83-9ac9-4ec6dce00fb6/s600'/>
-            </div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos?.small}/>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
