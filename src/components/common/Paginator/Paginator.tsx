@@ -6,7 +6,7 @@ import cn from 'classnames';
 type PaginatorProps = {
     pageSize: number
     totalItemsCount: number
-    currentPage: number
+    currentPage?: number
     onPageChanged: (pageNumber: number) => void
     portionSize?: number
 }
