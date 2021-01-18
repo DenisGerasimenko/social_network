@@ -10,7 +10,7 @@ type UsersPropsType = {
     unfollow: (userId: number) => void
     followingInProgress: Array<number>
     pageSize: number
-    totalUsersCount: number
+    totalItemsCount: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
 }
@@ -19,7 +19,7 @@ type UsersPropsType = {
 let Users = (props: UsersPropsType) => {
     return <div>
         <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                   totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}/>
+                   totalItemsCount={props.totalItemsCount} pageSize={props.pageSize} />
         <div>
             {
                 props.users.map(u => <User user={u}
