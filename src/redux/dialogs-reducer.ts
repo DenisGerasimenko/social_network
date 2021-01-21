@@ -21,17 +21,17 @@ export type DialogPageType = {
 let initialState = {
     messages: [
         {id: 1, message: 'Hi'},
-        {id: 2, message: 'How is your IT-kamasutra'},
-        {id: 3, message: 'Yo'},
-        {id: 4, message: 'Yo'},
-        {id: 5, message: 'Yo'},],
+        {id: 2, message: 'Hi'},
+        {id: 3, message: 'Hello'},
+        {id: 4, message: 'How are you?'},
+        {id: 5, message: 'How old are you?'},],
     dialogs: [
-        {id: 1, name: 'Dimych'},
-        {id: 2, name: 'Andrew'},
-        {id: 3, name: 'Sveta'},
-        {id: 4, name: 'Sasha'},
-        {id: 5, name: 'Victor'},
-        {id: 6, name: 'Valera'}
+        {id: 1, name: 'Misha'},
+        {id: 2, name: 'Fedya'},
+        {id: 3, name: 'Lesha'},
+        {id: 4, name: 'Maxim'},
+        {id: 5, name: 'Masha'},
+        {id: 6, name: 'Katya'}
         ]
 };
 

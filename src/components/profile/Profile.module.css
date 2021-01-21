@@ -1,1 +1,11 @@
+.profile{
+    background-color: #ac8c8c;
+}
 
+.descriptionBlock{
+    padding: 10px;
+}
+
+.mainPhoto{
+    max-width: 100px;
+}
