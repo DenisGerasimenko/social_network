@@ -9,12 +9,14 @@ type ProfilePropsType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
-    isOwner:boolean
+    isOwner: boolean
     savePhoto: any
+    saveProfile: any
 
 }
 
 const Profile = (props: ProfilePropsType) => {
+    debugger
 
     return (
         <div className={s.profile}>
@@ -22,7 +24,8 @@ const Profile = (props: ProfilePropsType) => {
                          profile={props.profile}
                          status={props.status}
                          updateStatus={props.updateStatus}
-                         savePhoto={props.savePhoto}/>
+                         savePhoto={props.savePhoto}
+                         saveProfile={props.saveProfile}/>
             <MyPostsContainer/>
         </div>
     )
