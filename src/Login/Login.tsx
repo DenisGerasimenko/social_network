@@ -22,12 +22,13 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
                                                                                                             }) => {
     return (
         <form onSubmit={handleSubmit}>
-            {createField('Email', 'email', [required], Input,)}
-            {createField('Password', 'password', [required], Input, {type: 'password'})}
+            {createField<LoginFormValuesTypeKeys>('Email', 'email', [required], Input,)}
+            {createField<LoginFormValuesTypeKeys>('Password', 'password', [required], Input, {type: 'password'})}
+            {createField<LoginFormValuesTypeKeys>(undefined, 'rememberMe', [], Input, {type: 'checkbox'}, 'rememberMe')}
 
 
             {captchaUrl && <img src={captchaUrl}/>}
-            {captchaUrl && createField('Symbols from image', 'captcha', [required], Input, {})}
+            {captchaUrl && createField<LoginFormValuesTypeKeys>('Symbols from image', 'captcha', [required], Input, {})}
 
             {error && <div className={style.formSummaryError}>
                 {error}
@@ -50,13 +51,14 @@ type MapDispatchPropsType = {
     login: (data: LoginParamsType) => void
 }
 
-
-type LoginFormValuesType = {
+export type LoginFormValuesType = {
     captcha: string
     email: string
     password: string
     rememberMe: boolean
 }
+
+type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
