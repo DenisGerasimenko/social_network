@@ -1,10 +1,28 @@
 import axios from "axios";
+import {ProfileType} from "../types/types";
 
-export type ResponseType<D = {}> = {
-    resultCode: number
+export type MeResponseType<D = {}> = {
+    resultCode: ResultCodesEnum
     messages: Array<string>
     data: D
 }
+
+export type LoginResponseType<D = {}> = {
+    resultCode: ResultCodesEnum | ResultCodeForCaptcha
+    messages: Array<string>
+    data: D
+}
+
+
+export enum ResultCodesEnum {
+    Sussess = 0,
+    Error = 1,
+}
+
+export enum ResultCodeForCaptcha {
+    CaptchaIsRequired = 10
+}
+
 type AuthMeType = {
     id: number
     email: string,
@@ -39,7 +57,7 @@ export type LoginParamsType = {
     email: string
     password: string
     rememberMe: boolean
-    captcha?: string
+    captcha: null | string
 }
 
 
@@ -89,21 +107,28 @@ export const profileAPI = {
             }
         });
     },
-    saveProfile(profile: any) {
+    saveProfile(profile: ProfileType) {
         return instance.put(`profile`, profile)
     }
 }
 
 export const authAPI = {
     me() {
-        return instance.get<any>('auth/me')
+        return instance.get<MeResponseType<{ id: number, email: string, login: string }>>('auth/me').then(res => res.data)
     },
     login(data: LoginParamsType) {
-        return instance.post<ResponseType<{ userId?: number }>>('auth/login/', data);
+        return instance.post<LoginResponseType<{ userId: number }>>('auth/login/', data)
+            .then(res => res.data)
     },
     logout() {
         return instance.delete('auth/login');
     },
+}
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get(`security/get-captcha-url`)
+    }
 }
 
 

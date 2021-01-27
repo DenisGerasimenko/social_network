@@ -1,8 +1,9 @@
 import {ThunkAction} from "redux-thunk";
-import {StateType} from "./redux-store";
+import {AppStateType} from "./redux-store";
 import {Action, Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {PostType, ProfileType} from "../types/types";
 
 
 const ADD_POST = 'ADD_POST';
@@ -19,40 +20,6 @@ type ProfileActionTypes =
     | ReturnType<typeof savePhotoSuccess>
 
 
-export type ContactsType = {
-    facebook: string
-    "website": string
-    "vk": string
-    "twitter": string
-    "instagram": string
-    "youtube": string
-    "github": string
-    "mainLink": string
-}
-export type PhotosType = {
-    small: string
-    large: string
-}
-
-export type ProfileType = {
-    "aboutMe": string
-    "contacts": ContactsType
-    "lookingForAJob": boolean
-    "lookingForAJobDescription": string
-    "fullName": string
-    "userId": number
-    "photos": PhotosType
-}
-
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
-type ProfilePageType = {
-    posts: Array<PostType>
-
-}
 
 
 let initialState = {
@@ -60,9 +27,10 @@ let initialState = {
         {id: 1, message: 'Hi, how are you?', likesCount: 12},
         {id: 2, message: 'It\'s my first post', likesCount: 11},
         {id: 3, message: 'It\'s my first post', likesCount: 11},
-        {id: 4, message: 'It\'s my first post', likesCount: 11}],
+        {id: 4, message: 'It\'s my first post', likesCount: 11}] as Array<PostType>,
     profile: {} as ProfileType,
-    status: ''
+    status: '',
+    newPostText:''
 };
 export type InitialStateType = typeof initialState
 
@@ -77,7 +45,8 @@ const profileReducer = (state = initialState, action: ProfileActionTypes): Initi
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost]
+                posts: [...state.posts, newPost],
+                newPostText:''
             };
         }
 
@@ -114,23 +83,25 @@ export const savePhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, pho
 
 type DispatchType = Dispatch<ProfileActionTypes>
 
-export const getUserProfile = (userId: number): ThunkAction<void, StateType, unknown, Action<string>> => {
-    debugger
+type ThunkType = ThunkAction<void, AppStateType, unknown, ProfileActionTypes>
+
+export const getUserProfile = (userId: number): ThunkType => {
+
     return async (dispatch: DispatchType) => {
         let response = await usersAPI.getProfile(userId)
         dispatch(setUserProfile(response.data));
 
     }
 }
-export const getStatus = (userId: number): ThunkAction<void, StateType, unknown, Action<string>> => {
-    return async (dispatch: DispatchType) => {
+export const getStatus = (userId: number): ThunkType => {
+    return async (dispatch) => {
         let response = await profileAPI.getStatus(userId)
 
         dispatch(setStatus(response.data));
     }
 }
-export const updateStatus = (status: string): ThunkAction<void, StateType, unknown, Action<string>> => {
-    return async (dispatch: DispatchType) => {
+export const updateStatus = (status: string): ThunkType => {
+    return async (dispatch) => {
         let response = await profileAPI.updateStatus(status)
         if (response.data.resultCode === 0) {
             dispatch(setStatus(status));
@@ -138,7 +109,7 @@ export const updateStatus = (status: string): ThunkAction<void, StateType, unkno
     }
 }
 
-export const savePhoto = (file: any): ThunkAction<void, StateType, unknown, Action<string>> => {
+export const savePhoto = (file: any): ThunkType => {
     return async (dispatch: DispatchType) => {
         let response = await profileAPI.savePhoto(file)
         if (response.data.resultCode === 0) {
@@ -148,8 +119,8 @@ export const savePhoto = (file: any): ThunkAction<void, StateType, unknown, Acti
 }
 
 
-export const saveProfile = (profile: any): ThunkAction<void, StateType, unknown, Action<string>> => {
-    return async (dispatch, getState: ()=> StateType ) => {
+export const saveProfile = (profile: any): ThunkAction<void, AppStateType, unknown, Action<string>> => {
+    return async (dispatch, getState: ()=> AppStateType ) => {
         const userId = getState().auth.userId;
         let response = await profileAPI.saveProfile(profile)
         if (response.data.resultCode === 0) {

@@ -1,13 +1,13 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './../Profile.module.css'
-import {ProfileType, ContactsType} from "../../../redux/profile-reducer";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/IMG-cc6fce77d19c2c7cdaacc19191b9f671-V.jpg";
 import ProfileDataForm from "./ProfileDataForm";
+import {ProfileType} from "../../../types/types";
 
 type ProfileInfoPropsType = {
-    profile: any
+    profile: ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
@@ -60,7 +60,7 @@ type ProfileDataPropsType = {
 
 const ProfileData = (props: ProfileDataPropsType) => {
 
-    debugger
+
     return <div>
         {props.isOwner && <div>
             <button onClick={props.goToEditMode}>edit</button>

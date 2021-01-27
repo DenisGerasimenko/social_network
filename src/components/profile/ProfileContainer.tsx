@@ -1,18 +1,17 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {
     getStatus,
     getUserProfile,
-    PhotosType,
-    ProfileType,
     savePhoto,
     saveProfile,
     updateStatus
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
+import {ProfileType} from "../../types/types";
 
 
 type PathParamsType = {
@@ -22,7 +21,7 @@ type PathParamsType = {
 type MapStatePropsType = {
     profile: ProfileType
     status: string
-    autorizedUserId: number
+    autorizedUserId: number | null
     isAuth: boolean
 
 }
@@ -43,7 +42,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userId = +this.props.match.params.userId;
-        if (!userId) {
+        if (!userId && !!this.props.autorizedUserId) {
             userId = this.props.autorizedUserId;
             if (!userId) {
                 this.props.history.push('/login');
@@ -59,7 +58,7 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
-        debugger
+
         if (this.props.match.params.userId != prevProps.match.params.userId)
             this.refreshProfile();
     }
@@ -78,7 +77,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
 }
 
-let mapStateToProps = (state: StateType) => ({
+let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     autorizedUserId: state.auth.userId,
@@ -86,7 +85,7 @@ let mapStateToProps = (state: StateType) => ({
 });
 
 export default compose<React.ComponentClass>(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter
 )(ProfileContainer);
 

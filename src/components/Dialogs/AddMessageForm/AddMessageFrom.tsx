@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 
@@ -8,7 +8,7 @@ type FormDataType = {
 
 const maxLength50 = maxLengthCreator(50);
 
-const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const AddMessageForm: FC<InjectedFormProps<FormDataType>> = (props) => {
 
 
     return (

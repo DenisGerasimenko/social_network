@@ -1,8 +1,12 @@
 import s from "../Friends.module.css";
 import {NavLink} from "react-router-dom";
-import React from "react";
+import React, {FC} from "react";
+import {FriendType} from "../../../redux/sidebar-reducer";
 
-const FriendItem = (props: any) => {
+type PropsType = FriendType
+
+
+const FriendItem: FC<PropsType> = (props) => {
     let path = '/friends/' + props.id;
     return <div>
         <div className={s.item}>

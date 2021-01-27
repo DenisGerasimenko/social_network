@@ -1,18 +1,21 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {PostType} from "../../../redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+import {PostType} from "../../../types/types";
 
-
-type MyPostsPropsType = {
-    addPost: (newPostText: string) => void
+export type MapStatePropsType={
     posts: Array<PostType>
 }
+export type MapDispatchPropsType={
+    addPost: (newPostText: string) => void
+}
+type PropsType = MapStatePropsType & MapDispatchPropsType
 
-const MyPosts = React.memo((props: MyPostsPropsType) => {
+
+const MyPosts = React.memo((props: PropsType) => {
     let postsElements =
         [...props.posts]
             .reverse()

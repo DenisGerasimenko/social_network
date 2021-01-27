@@ -3,7 +3,8 @@ import {createField, Input, Textarea} from "../../common/FormsControls/FormsCont
 import {InjectedFormProps, reduxForm} from "redux-form";
 import s from './../Profile.module.css'
 import style from "../../common/FormsControls/FormsControls.module.css";
-import {ProfileType} from "../../../redux/profile-reducer";
+import {ProfileType} from "../../../types/types";
+
 
 
 // export type FormDataType = {

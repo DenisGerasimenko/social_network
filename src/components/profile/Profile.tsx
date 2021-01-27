@@ -1,8 +1,8 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from "./myPosts/MyPostsContainer";
-import {PhotosType, ProfileType} from "../../redux/profile-reducer";
 import s from "../profile/Profile.module.css";
+import {ProfileType} from "../../types/types";
 
 
 type ProfilePropsType = {
@@ -16,7 +16,6 @@ type ProfilePropsType = {
 }
 
 const Profile = (props: ProfilePropsType) => {
-    debugger
 
     return (
         <div className={s.profile}>

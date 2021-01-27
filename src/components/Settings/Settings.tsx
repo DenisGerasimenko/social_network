@@ -1,7 +1,7 @@
-import React from "react";
+import React, {FC} from "react";
 
 
-const Settings = (props: any) => {
+const Settings:FC = (props) => {
     return (
         <div>
             Settings

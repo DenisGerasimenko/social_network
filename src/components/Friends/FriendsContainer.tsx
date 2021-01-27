@@ -1,16 +1,16 @@
-import Friends from "./Friends";
+import Friends, {MapStatePropsType} from "./Friends";
 import React from "react";
-import {ReduxStoreType, StateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         friends: state.sidebar.friends
     }
 }
 
-const FriendsContainer = connect(mapStateToProps, {})(Friends);
+const FriendsContainer = connect<MapStatePropsType, {}, {}, AppStateType>(mapStateToProps, {})(Friends);
 
 
 export default FriendsContainer;

@@ -8,7 +8,7 @@ import Login from "./Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
-import store, {StateType} from "./redux/redux-store";
+import store, {AppStateType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspense";
 
@@ -56,7 +56,7 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
