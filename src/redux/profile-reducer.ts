@@ -3,7 +3,7 @@ import {AppStateType} from "./redux-store";
 import {Action, Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {PostType, ProfileType} from "../types/types";
+import {PhotosType, PostType, ProfileType} from "../types/types";
 
 
 const ADD_POST = 'ADD_POST';
@@ -78,7 +78,7 @@ export const setStatus = (status: string) => ({type: SET_STATUS, status} as cons
 
 export const deletePost = (postId: number) => ({type: DELETE_POST, postId} as const)
 
-export const savePhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
+export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 
 
 type DispatchType = Dispatch<ProfileActionTypes>
@@ -102,10 +102,10 @@ export const getStatus = (userId: number): ThunkType => {
 }
 export const updateStatus = (status: string): ThunkType => {
     return async (dispatch) => {
-        let response = await profileAPI.updateStatus(status)
-        if (response.data.resultCode === 0) {
-            dispatch(setStatus(status));
-        }
+            let response = await profileAPI.updateStatus(status)
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status));
+            }
     }
 }
 

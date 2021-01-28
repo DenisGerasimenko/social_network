@@ -30,10 +30,10 @@ export type ProfileType = {
     photos: PhotosType
 }
 export type UserType = {
-    id: number
-    followed: boolean
     name: string
-    status: string
+    id: number
     photos: PhotosType
+    status: null
+    followed: boolean
 
 }
