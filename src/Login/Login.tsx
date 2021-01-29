@@ -4,10 +4,11 @@ import {createField, Input} from "../components/common/FormsControls/FormsContro
 import {required} from "../utils/validators/validators";
 import {Redirect} from "react-router-dom";
 import style from './../components/common/FormsControls/FormsControls.module.css'
-import {LoginParamsType} from "../api/api";
+
 import {AppStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
 import {login} from "../redux/auth-reducer";
+import {LoginParamsType} from "../api/auth-api";
 
 
 type LoginFormOwnProps = {
