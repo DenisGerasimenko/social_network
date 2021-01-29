@@ -1,27 +1,22 @@
-import profileReducer, {
-    addPostActionCreator,
-    deletePost,
-    InitialStateType,
-    PostType,
-    ProfileType
-} from "./profile-reducer";
+import {ProfileType} from "../types/types";
+import profileReducer, {actions, InitialStateType} from "./profile-reducer";
 
+let state: InitialStateType
 
-let state = {
+state = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 12},
         {id: 2, message: 'It\'s my first post', likesCount: 11},
         {id: 3, message: 'It\'s my first post', likesCount: 11},
         {id: 4, message: 'It\'s my first post', likesCount: 11}],
-    profile: [] as Array<ProfileType>,
-    status: ''
+    profile: {} as ProfileType,
+    status: '',
+    newPostText: ''
 };
 
 it('length of posts should be incremented', () => {
     // 1. test data
-    let action = addPostActionCreator('it-kamasutra.com');
-
-
+    let action = actions.addPostActionCreator('it-kamasutra.com');
 
 
     // 2. action
@@ -34,7 +29,7 @@ it('length of posts should be incremented', () => {
 
 it('message of new post should be correct', () => {
     // 1. test data
-    let action = addPostActionCreator('it-kamasutra.com');
+    let action = actions.addPostActionCreator('it-kamasutra.com');
 
 
     // 2. action
@@ -47,7 +42,7 @@ it('message of new post should be correct', () => {
 
 it('after deleting length of messages should be decrement ', () => {
     // 1. test data
-    let action = deletePost(1);
+    let action = actions.deletePost(1);
 
 
     // 2. action
@@ -60,7 +55,7 @@ it('after deleting length of messages should be decrement ', () => {
 
 it(`after deleting length shouldn't be decrement if id is incorrect`, () => {
     // 1. test data
-    let action = deletePost(1000);
+    let action = actions.deletePost(1000);
 
 
     // 2. action
