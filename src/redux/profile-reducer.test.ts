@@ -1,9 +1,8 @@
 import {ProfileType} from "../types/types";
-import profileReducer, {actions, InitialStateType} from "./profile-reducer";
+import profileReducer, {actions} from "./profile-reducer";
 
-let state: InitialStateType
 
-state = {
+let state = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 12},
         {id: 2, message: 'It\'s my first post', likesCount: 11},

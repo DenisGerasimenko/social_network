@@ -13,7 +13,9 @@ export type DialogPageType = {
     messages:Array<MessageType>
     dialogs: Array<DialogType>
 }
-type ActionsTypes = InferActionsTypes<typeof actions>
+
+
+type ActionsType = InferActionsTypes<typeof actions>
 
 export type InitialStateType = typeof initialState
 
@@ -34,10 +36,10 @@ let initialState = {
     ] as Array<DialogType>
 };
 
-const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
 
-        case 'SEND_MESSAGE':
+        case 'SN/DIALOGS/SEND_MESSAGE':
             let body = action.newMessageBody;
             return {
                 ...state,
@@ -49,7 +51,7 @@ const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStat
 }
 
 export const actions={
-    sendMessageCreator: (newMessageBody: string) => ({type: 'SEND_MESSAGE', newMessageBody} as const)
+    sendMessageCreator: (newMessageBody: string) => ({type: 'SN/DIALOGS/SEND_MESSAGE', newMessageBody} as const)
 }
 
 
