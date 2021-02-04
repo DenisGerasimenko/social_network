@@ -1,14 +1,13 @@
 import React from 'react';
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, Input} from "../components/common/FormsControls/FormsControls";
-import {required} from "../utils/validators/validators";
 import {Redirect} from "react-router-dom";
-import style from './../components/common/FormsControls/FormsControls.module.css'
-
-import {AppStateType} from "../redux/redux-store";
+import style from '../common/FormsControls/FormsControls.module.css'
 import {connect} from "react-redux";
-import {login} from "../redux/auth-reducer";
-import {LoginParamsType} from "../api/auth-api";
+import {createField, Input} from "../common/FormsControls/FormsControls";
+import {required} from "../../utils/validators/validators";
+import {LoginParamsType} from "../../api/auth-api";
+import {AppStateType} from "../../redux/redux-store";
+import {login} from "../../redux/auth-reducer";
 
 
 type LoginFormOwnProps = {

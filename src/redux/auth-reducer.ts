@@ -1,6 +1,4 @@
 import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api";
-import {ThunkAction} from "redux-thunk";
-import {Action} from "redux";
 import {FormAction, stopSubmit} from "redux-form";
 import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {securityAPI} from "../api/security-api";

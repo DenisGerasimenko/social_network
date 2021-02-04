@@ -2,9 +2,11 @@ import React, {FC} from "react";
 import s from './../Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import spost from './../../profile/myPosts/Post/Post.module.css'
-import {DialogType} from "../../../redux/dialogs-reducer";
 
-type PropsType = DialogType
+type PropsType ={
+    id: number
+    name: string
+}
 
 const DialogItem: FC<PropsType> = (props) => {
     let path = '/dialogs/' + props.id;

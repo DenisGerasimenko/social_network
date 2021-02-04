@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import {UserType} from "../../types/types";
 
 
-type UserPropsType = {
+type PropsType = {
     key: number
     user: UserType
     follow: (userId: number) => void
@@ -14,21 +14,22 @@ type UserPropsType = {
 }
 
 
-export const User = (props: UserPropsType) => {
+export const User: React.FC<PropsType> = (props) => {
     return (
         <div>
         <span>
             <div>
                 <NavLink to={'/profile/' + props.user.id}>
-                <img src={props.user.photos.small != null ? props.user.photos.small : userPhoto} className={styles.userPhoto}/>
+                <img src={props.user.photos.small != null ? props.user.photos.small : userPhoto}
+                     className={styles.userPhoto}/>
                 </NavLink>
 
     </div>
     <div>
     {props.user.followed ? <button disabled={props.followingInProgress.some((id: number) => id === props.user.id)}
-                          onClick={() => {
-                              props.unfollow(props.user.id);
-                          }}>
+                                   onClick={() => {
+                                       props.unfollow(props.user.id);
+                                   }}>
             Unfollow</button>
 
         : <button disabled={props.followingInProgress.some(id => id === props.user.id)}

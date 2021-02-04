@@ -1,16 +1,14 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 
 
-type ProfileStatusPropsType = {
+type PropsType = {
     status: string
     updateStatus: (status: string) => void
 }
 
-let arr = [0, () => {
-}];
-let [a, setA] = arr;
 
-const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
+
+const ProfileStatusWithHooks:React.FC<PropsType> = (props) => {
 
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);

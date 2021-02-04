@@ -8,7 +8,7 @@ export type ActionsType = InferActionsTypes<typeof actions>
 
 export type InitialStateType = typeof initialState
 
-type ThunkType = BaseThunkType<ActionsType | FormAction>
+export type ThunkType = BaseThunkType<ActionsType | FormAction>
 
 
 let initialState = {
@@ -19,7 +19,6 @@ let initialState = {
         {id: 4, message: 'It\'s my first post', likesCount: 11}] as Array<PostType>,
     profile: {} as ProfileType,
     status: '',
-    newPostText: ''
 };
 
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -33,8 +32,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
+                posts: [...state.posts, newPost]
             };
         }
 

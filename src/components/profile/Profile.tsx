@@ -5,17 +5,17 @@ import s from "../profile/Profile.module.css";
 import {ProfileType} from "../../types/types";
 
 
-type ProfilePropsType = {
+type PropsType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: any
-    saveProfile: any
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 
 }
 
-const Profile = (props: ProfilePropsType) => {
+const Profile: React.FC<PropsType> = (props) => {
 
     return (
         <div className={s.profile}>

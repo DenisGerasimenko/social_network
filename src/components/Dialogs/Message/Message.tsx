@@ -1,6 +1,5 @@
 import React, {FC} from "react";
 import s from './../Dialogs.module.css';
-import {MessageType} from "../../../redux/dialogs-reducer";
 
 type PropsType = {
     message: string
