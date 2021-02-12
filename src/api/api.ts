@@ -7,7 +7,7 @@ export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
 }
 
 export enum ResultCodesEnum {
-    Sussess = 0,
+    Success = 0,
     Error = 1,
 }
 

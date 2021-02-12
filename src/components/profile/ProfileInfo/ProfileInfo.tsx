@@ -61,7 +61,6 @@ type ProfileDataPropsType = {
 
 const ProfileData: React.FC<ProfileDataPropsType> = (props) => {
 
-debugger
     return <div>
         {props.isOwner && <div>
             <button onClick={props.goToEditMode}>edit</button>
