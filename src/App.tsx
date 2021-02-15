@@ -2,7 +2,7 @@ import React from "react";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
-import UsersContainer from "./components/Users/UsersContainer";
+import {UsersPage} from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
@@ -10,7 +10,7 @@ import {initializeApp} from "./redux/app-reducer";
 import store, {AppStateType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspense";
-import Login from "./components/Login/Login";
+import {LoginPage} from "./components/Login/LoginPage";
 
 
 
@@ -62,9 +62,9 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                         <Route path='/profile/:userId?'
                                render={() => <SuspendedProfile/>}/>
                         <Route path={'/users'}
-                               render={() => <UsersContainer/>}/>
+                               render={() => <UsersPage/>}/>
                         <Route path='/login'
-                               render={() => <Login/>}/>
+                               render={() => <LoginPage/>}/>
                         <Route path='*'
                                render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>
